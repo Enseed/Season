@@ -1,0 +1,6 @@
+[submodule "libs/rapidjson"]
+	path = libs/rapidjson
+	url = https://github.com/miloyip/rapidjson.git
+[submodule "libs/Enseed/Reflect/API"]
+	path = libs/Enseed/Reflect/API
+	url = https://github.com/Enseed/ReflectAPI.git
