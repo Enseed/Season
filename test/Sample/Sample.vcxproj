@@ -84,11 +84,11 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MyStructure.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe %(Identity) -fms-compatibility-version=19.00.22609  "-I$(IncludePath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe %(Identity) -fms-compatibility-version=19.00.22609  "-I$(IncludePath)" -IC:\Work\Enseed_svn\trunk\ThirdParty\boost</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath).reflect.h</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe</AdditionalInputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe %(Identity) -fms-compatibility-version=19.00.22609  "-I$(IncludePath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe %(Identity) -fms-compatibility-version=19.00.22609  "-I$(IncludePath)" -IC:\Work\Enseed_svn\trunk\ThirdParty\boost</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).reflect.h</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe</AdditionalInputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>

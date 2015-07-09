@@ -11,19 +11,19 @@ struct BoostTree
 {
 public:
 	typedef boost::property_tree::ptree Document;
-	typedef boost::property_tree::ptree Value;
+	typedef boost::property_tree::ptree Node;
 
-	static void setObjectType(Value *value)
+	static void setObjectType(Node *value)
 	{}
 
 	template<class T>
-	static void addMember(Value *value, const char *key, const T &v, Document *document)
+	static void addMember(Node *value, const char *key, const T &v, Document *document)
 	{
 		value->AddMember(key, v, document->GetAllocator());
 	}
 
 	template<class T>
-	static void setSimple(Value *node, const char *name, const T &value, Document *document)
+	static void setSimple(Node *node, const char *name, const T &value, Document *document)
 	{
 		if (name == nullptr)
 		{
@@ -38,10 +38,23 @@ public:
 		}
 	}
 
-	static void setString(Value *node, const char *name, const char *value, Document *document)
+	static void setString(Node *node, const char *name, const char *value, Document *document)
 	{
 		setSimple(node, name, value, document);
 	}
+
+	static void addNode(Node *parent, const char *name, Node *child, Document *document)
+	{
+		if (name == nullptr)
+		{
+			parent->push_back(std::make_pair("", *child));
+		}
+		else
+		{
+			parent->push_back(std::make_pair(name, *child));
+		}
+	}
+
 
 	static std::string toString(const boost::property_tree::ptree &document)
 	{
@@ -49,6 +62,9 @@ public:
 		boost::property_tree::write_json(strm, document);
 		return strm.str();
 	}
+
+	static void setArrayType(Node *node)
+	{}
 };
 
 typedef Season<BoostTree> BoostSeason;

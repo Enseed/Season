@@ -12,17 +12,17 @@ struct RapidJSONTree
 {
 public:
 	typedef rapidjson::Document Document;
-	typedef rapidjson::Value Value;
+	typedef rapidjson::Value Node;
 
 	template<class T>
-	static void addMember(Value *value, const char *name, const T &v, Document *document)
+	static void addMember(Node *value, const char *name, const T &v, Document *document)
 	{
 		rapidjson::GenericValue<rapidjson::UTF8<> >::StringRefType key(name);
 		value->AddMember(key, v, document->GetAllocator());
 	}
 
 	template<class T>
-	static void setSimple(Value *node, const char *name, const T &value, Document *document)
+	static void setSimple(Node *node, const char *name, const T &value, Document *document)
 	{
 		if (name == nullptr)
 		{
@@ -34,7 +34,7 @@ public:
 		}
 	}
 
-	static void setString(Value *node, const char *name, const char *value, Document *document)
+	static void setString(Node *node, const char *name, const char *value, Document *document)
 	{
 		if (name == nullptr)
 		{
@@ -46,9 +46,26 @@ public:
 		}
 	}
 
-	static void setObjectType(Value *value)
+	static void setObjectType(Node *node)
 	{
-		value->SetObject();
+		node->SetObject();
+	}
+
+	static void setArrayType(Node *node)
+	{
+		node->SetArray();
+	}
+
+	static void addNode(Node *parent, const char *name, Node *child, Document *document)
+	{
+		if (name == nullptr)
+		{
+			parent->PushBack(*child, document->GetAllocator());
+		}
+		else
+		{
+			parent->AddMember(rapidjson::StringRef(name), *child, document->GetAllocator());
+		}
 	}
 
 	static std::string toString(const Document &document)
