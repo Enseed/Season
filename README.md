@@ -121,7 +121,7 @@ Give the following results:
     "mapOfInt": {
       "foo": 123
     },
-    "optionalInt": 70938,
+    "optionalInt": 999,
     "subStruct": {
       "sharedIntPtr": 777
     }
