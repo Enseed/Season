@@ -3,7 +3,9 @@
 Season is a C++ json serializer and deserializer based on the Reflect API:
  - Reflect parses target .h files and generate introspection structures
  - Season uses the instrospection structures to generate json strings
- 
+
+Once set up correctly in Visual Studio, adding fields in the .h file is automatically picked up by Season and require no extra work.
+
 Season currently support writing the following types to json format:
  - Basic types (char, int, float, double, boolean, etc.)
  - std::string and const char *
@@ -17,6 +19,8 @@ Season currently support writing the following types to json format:
 Adding support for additional container can be done with about 5 lines of code by specializing a template for the container type.
 
 Serialization to JSON is done using third party libraries. Currently boost::property_tree::json_parser and RapidJSON are supported. Season contains the logic to visit C++ objects and is designed to accomodate other third party json serializer.
+
+The code for json serialization (visiting object fields, getting their name and type) is generated at compile time.  No RTTI or dynamic cast is required.
 
 Current results with
 
