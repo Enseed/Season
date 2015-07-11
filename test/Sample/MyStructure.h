@@ -4,6 +4,8 @@
 #include <vector>
 #include <map>
 #include <boost/optional.hpp>
+#include <boost/date_time/posix_time/ptime.hpp>
+#include <boost/uuid/uuid.hpp>
 #include <memory>
 
 struct MySubStructure
@@ -20,4 +22,6 @@ struct MyStructure
 	std::map<std::string, int> mapOfInt;
 	boost::optional<int> optionalInt;
 	MySubStructure subStruct;
+	boost::posix_time::ptime timeValue;
+	boost::uuids::uuid uuidValue;
 };

@@ -96,6 +96,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\BoostSeason.h" />
+    <ClInclude Include="..\..\Extensions\boost\LexicalCast.h" />
+    <ClInclude Include="..\..\Extensions\boost\Optional.h" />
+    <ClInclude Include="..\..\Extensions\boost\PosixTime.h" />
+    <ClInclude Include="..\..\Extensions\boost\UUId.h" />
+    <ClInclude Include="..\..\Extensions\std\SharedPtr.h" />
+    <ClInclude Include="..\..\Extensions\std\String.h" />
+    <ClInclude Include="..\..\Extensions\std\UniquePtr.h" />
+    <ClInclude Include="..\..\Extensions\std\Vector.h" />
     <ClInclude Include="..\..\RapidSeason.h" />
     <ClInclude Include="..\..\Season.h" />
   </ItemGroup>

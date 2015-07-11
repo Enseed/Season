@@ -49,66 +49,10 @@ namespace parsing
 		{
 			TConvertNode::toDocument(name, obj, document, node);
 		}
-	};
 
-	template<class TREE, class T>
-	struct TConvertNode<TREE, std::vector<T>, Kind::COMPLEX>
-	{
-		static void toDocument(const char *name, const std::vector<T> &vecObj, typename TREE::Document *document, typename TREE::Node *node)
+		static void fromDocument(const typename TREE::Node &node, T *obj, typename TREE::Document *document)
 		{
-			TREE::Node vecNode;
-			TREE::setArrayType(&vecNode);
-
-			for (const T &obj : vecObj)
-			{
-				ConvertNode<TREE, T>::toDocument(nullptr, obj, document, &vecNode);
-			}
-			TREE::addNode(node, name, &vecNode, document);
-		}
-	};
-
-	template<class TREE, class T>
-	struct TConvertNode<TREE, boost::optional<T>, Kind::COMPLEX>
-	{
-		static void toDocument(const char *name, const boost::optional<T> &optObj, typename TREE::Document *document, typename TREE::Node *node)
-		{
-			if (optObj)
-			{
-				ConvertNode<TREE, T>::toDocument(name, optObj.get(), document, node);
-			}
-		}
-	};
-
-	template<class TREE, class T>
-	struct TConvertNode<TREE, std::shared_ptr<T>, Kind::COMPLEX>
-	{
-		static void toDocument(const char *name, const std::shared_ptr<T> &objPtr, typename TREE::Document *document, typename TREE::Node *node)
-		{
-			if (objPtr)
-			{
-				ConvertNode<TREE, T>::toDocument(name, *objPtr, document, node);
-			}
-		}
-	};
-
-	template<class TREE, class T>
-	struct TConvertNode<TREE, std::unique_ptr<T>, Kind::COMPLEX>
-	{
-		static void toDocument(const char *name, const std::unique_ptr<T> &objPtr, typename TREE::Document *document, typename TREE::Node *node)
-		{
-			if (objPtr)
-			{
-				ConvertNode<TREE, T>::toDocument(name, *objPtr, document, node);
-			}
-		}
-	};
-
-	template<class TREE>
-	struct TConvertNode<TREE, std::string, Kind::COMPLEX>
-	{
-		static void toDocument(const char *name, const std::string &obj, typename TREE::Document *document, typename TREE::Node *node)
-		{
-			TREE::setString(node, name, obj.c_str(), document);
+			TConvertNode::fromDocument(node, obj, document);
 		}
 	};
 
@@ -125,7 +69,7 @@ namespace parsing
 			{
 				const auto &key = keyValue.first;
 				const auto &value = keyValue.second;
-				ConvertNode<TREE, decltype(value)>::toDocument(key, value, document, &mapNode);
+				ConvertNode<TREE, std::remove_reference<decltype(value)>::type>::toDocument(key, value, document, &mapNode);
 			}
 
 			TREE::addNode(node, name, &mapNode, document);
@@ -139,7 +83,7 @@ namespace parsing
 			reflect::Class<V>::visitFields([&obj, &document, &objNode](auto field) {
 				const char *name = decltype(field)::name();
 				const auto &value = decltype(field)::readRef(obj);
-				ConvertNode<TREE, decltype(value)>::toDocument(name, value, document, &objNode);
+				ConvertNode<TREE, std::remove_reference<decltype(value)>::type>::toDocument(name, value, document, &objNode);
 			});
 			TREE::addNode(node, name, &objNode, document);
 		}
@@ -149,6 +93,39 @@ namespace parsing
 			// distinguish between types and map objects
 			toDocumentImpl(name, obj, document, node);
 		}
+
+		template<class K, class V>
+		static void fromDocumentImpl(const typename TREE::Node &node, std::map<K, V> *map, typename TREE::Document *document)
+		{
+			for (auto iter = TREE::attributeBegin(node); iter != TREE::attributeEnd(node); ++iter)
+			{
+				const char *name = TREE::getIterName(iter);
+				V value;
+				ConvertNode<TREE, V>::fromDocument(TREE::getIterValue(iter), &value, document);
+				map->insert(std::make_pair(name, value));
+			}
+		}
+
+		template<class V>
+		static void fromDocumentImpl(const typename TREE::Node &node, V *obj, typename TREE::Document *document)
+		{
+			reflect::Class<V>::visitFields([&obj, &document, &node](auto field) {
+
+				const char *name = decltype(field)::name();
+				const TREE::Node *child = TREE::getNode(node, name);
+				if (child != nullptr)
+				{
+					auto *value = decltype(field)::writePtr(obj);
+					ConvertNode<TREE, std::remove_reference<decltype(*value)>::type>::fromDocument(*child, value, document);
+				}
+			});
+		}
+
+		static void fromDocument(const typename TREE::Node &node, T *obj, typename TREE::Document *document)
+		{
+			// distinguish between types and map objects
+			fromDocumentImpl(node, obj, document);
+		}
 	};
 
 	template<class TREE, class T>
@@ -157,6 +134,11 @@ namespace parsing
 		static void toDocument(const char *name, const T &obj, typename TREE::Document *document, typename TREE::Node *node)
 		{
 			TREE::setSimple(node, name, obj, document);
+		}
+
+		static void fromDocument(const typename TREE::Node &node, T *obj, typename TREE::Document *document)
+		{
+			TREE::getSimple(node, obj, document);
 		}
 	};
 }
@@ -173,4 +155,27 @@ public:
 		parsing::ConvertNode<TREE, T>::toDocument("d", obj, &d, &d);
 		return TREE::toString(d);
 	}
+
+	template<class T>
+	static void fromJSON(const std::string &jsonStr, T *obj)
+	{
+		fromJSON(jsonStr.c_str(), obj);
+	}
+
+	template<class T>
+	static void fromJSON(const char *jsonStr, T *obj)
+	{
+		TREE::Document document;
+		TREE::parse(jsonStr, &document);
+		const TREE::Node *node = TREE::getNode(document, "d");
+		parsing::ConvertNode<TREE, T>::fromDocument(*node, obj, &document);
+	}
 };
+
+#include "Extensions/boost/Optional.h"
+#include "Extensions/std/Vector.h"
+#include "Extensions/std/UniquePtr.h"
+#include "Extensions/std/SharedPtr.h"
+#include "Extensions/std/String.h"
+#include "Extensions/boost/PosixTime.h"
+#include "Extensions/boost/UUId.h"

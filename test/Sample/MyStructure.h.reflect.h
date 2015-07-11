@@ -1,6 +1,6 @@
 #ifndef __RECLECT_MYSTRUCTURE_H_REFLECT_H__
 #define __RECLECT_MYSTRUCTURE_H_REFLECT_H__
-/* This file was generated on 2015-Jul-08 23:27:40 by Reflect */
+/* This file was generated on 2015-Jul-11 15:29:47 by Reflect */
 
 #include <Enseed/Reflect/API/Class.h>
 
@@ -62,7 +62,7 @@ template<> struct Class<MyStructure, 0> : public ClassBase<MyStructure>
 {
 	typedef MyStructure type;
 	static constexpr int parent_count = 0;
-	static constexpr int field_count = 6 ;
+	static constexpr int field_count = 8 ;
 
 	struct Fields
 	{
@@ -138,6 +138,30 @@ template<> struct Class<MyStructure, 0> : public ClassBase<MyStructure>
 			static const struct MySubStructure& readRef(const MyStructure &target) { return target.subStruct; }
 			static struct MySubStructure* writePtr(MyStructure *target) { return &target->subStruct; }
 		};
+		struct timeValue
+		{
+			typedef timeValue field_type;
+			typedef boost::posix_time::ptime type;
+			typedef const boost::posix_time::ptime const_type;
+			typedef MyStructure host_type;
+			typedef const MyStructure const_host_type;
+			static const char* name() { return "timeValue"; }
+			static constexpr reflect::Visibility::Value visibility = reflect::Visibility::PUBLIC;
+			static const boost::posix_time::ptime& readRef(const MyStructure &target) { return target.timeValue; }
+			static boost::posix_time::ptime* writePtr(MyStructure *target) { return &target->timeValue; }
+		};
+		struct uuidValue
+		{
+			typedef uuidValue field_type;
+			typedef boost::uuids::uuid type;
+			typedef const boost::uuids::uuid const_type;
+			typedef MyStructure host_type;
+			typedef const MyStructure const_host_type;
+			static const char* name() { return "uuidValue"; }
+			static constexpr reflect::Visibility::Value visibility = reflect::Visibility::PUBLIC;
+			static const boost::uuids::uuid& readRef(const MyStructure &target) { return target.uuidValue; }
+			static boost::uuids::uuid* writePtr(MyStructure *target) { return &target->uuidValue; }
+		};
 	};
 
 	template<typename CB> static void visitParents(CB &cb = CB())
@@ -152,6 +176,8 @@ template<> struct Class<MyStructure, 0> : public ClassBase<MyStructure>
 		cb(Fields::mapOfInt());
 		cb(Fields::optionalInt());
 		cb(Fields::subStruct());
+		cb(Fields::timeValue());
+		cb(Fields::uuidValue());
 	}
 };
 
@@ -161,13 +187,17 @@ template<> struct Field<MyStructure, 2> : public Class<MyStructure>::Fields::vec
 template<> struct Field<MyStructure, 3> : public Class<MyStructure>::Fields::mapOfInt{};
 template<> struct Field<MyStructure, 4> : public Class<MyStructure>::Fields::optionalInt{};
 template<> struct Field<MyStructure, 5> : public Class<MyStructure>::Fields::subStruct{};
+template<> struct Field<MyStructure, 6> : public Class<MyStructure>::Fields::timeValue{};
+template<> struct Field<MyStructure, 7> : public Class<MyStructure>::Fields::uuidValue{};
 
 template<> struct SortedField<MyStructure, 0> : public Class<MyStructure>::Fields::intValue{};
 template<> struct SortedField<MyStructure, 1> : public Class<MyStructure>::Fields::mapOfInt{};
 template<> struct SortedField<MyStructure, 2> : public Class<MyStructure>::Fields::optionalInt{};
 template<> struct SortedField<MyStructure, 3> : public Class<MyStructure>::Fields::stringValue{};
 template<> struct SortedField<MyStructure, 4> : public Class<MyStructure>::Fields::subStruct{};
-template<> struct SortedField<MyStructure, 5> : public Class<MyStructure>::Fields::vectorOfInt{};
+template<> struct SortedField<MyStructure, 5> : public Class<MyStructure>::Fields::timeValue{};
+template<> struct SortedField<MyStructure, 6> : public Class<MyStructure>::Fields::uuidValue{};
+template<> struct SortedField<MyStructure, 7> : public Class<MyStructure>::Fields::vectorOfInt{};
 
 } // namespace reflect
 
