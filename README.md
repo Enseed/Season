@@ -128,3 +128,18 @@ Give the following results:
   }
 }
 ```
+
+On the same computer, reading from json yields the following results:
+
+```
+306352 iterations / second using RapidSeason
+ 1.002961s wall, 0.982806s user + 0.015600s system = 0.998406s CPU (99.5%)
+18648 iterations / second using BoostSeason
+ 1.001721s wall, 0.998406s user + 0.000000s system = 0.998406s CPU (99.7%)
+```
+
+For comparison, reading the json string using gson in java gives:
+
+```
+106909 iterations / second using gson
+```
