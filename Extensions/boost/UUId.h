@@ -5,9 +5,12 @@
 #include <boost/uuid/uuid_io.hpp>
 #include "LexicalCast.h"
 
-namespace parsing
+namespace season
 {
-	template<class TREE>
-	struct TConvertNode<TREE, boost::uuids::uuid, Kind::COMPLEX> : public ConvertNodeLexicalCast<TREE, boost::uuids::uuid> {};
+	namespace parsing
+	{
+		template<class TREE>
+		struct ConvertComplexType<TREE, boost::uuids::uuid> : public ConvertNodeLexicalCast<TREE, boost::uuids::uuid>{};
+	}
 }
 

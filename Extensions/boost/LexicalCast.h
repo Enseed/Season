@@ -4,22 +4,25 @@
 #include <boost/lexical_cast.hpp>
 #include <Enseed/Reflect/API/Class.h>
 
-namespace parsing
+namespace season
 {
-	template<class TREE, class T>
-	struct ConvertNodeLexicalCast
+	namespace parsing
 	{
-		static void toDocument(const char *name, const T &obj, typename TREE::Document *document, typename TREE::Node *node)
+		template<class TREE, class T>
+		struct ConvertNodeLexicalCast
 		{
-			std::string value = boost::lexical_cast<std::string>(obj);
-			TREE::setString(node, name, value.c_str(), document);
-		}
+			static void toDocument(const char *name, const T &obj, typename TREE::Document *document, typename TREE::Node *node)
+			{
+				std::string value = boost::lexical_cast<std::string>(obj);
+				TREE::setString(node, name, value.c_str(), document);
+			}
 
-		static void fromDocument(const typename TREE::Node &node, T *obj, typename TREE::Document *document)
-		{
-			std::string strValue;
-			*obj = boost::lexical_cast<T>(strValue);
-		}
-	};
+			static void fromDocument(const typename TREE::Node &node, T *obj, typename TREE::Document *document)
+			{
+				std::string strValue;
+				*obj = boost::lexical_cast<T>(strValue);
+			}
+		};
+	}
+
 }
-

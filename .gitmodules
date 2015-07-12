@@ -4,3 +4,9 @@
 [submodule "libs/Enseed/Reflect/API"]
 	path = libs/Enseed/Reflect/API
 	url = https://github.com/Enseed/ReflectAPI.git
+[submodule "libs/Google/googletest"]
+	path = libs/Google/googletest
+	url = https://chromium.googlesource.com/external/googletest.git
+[submodule "libs/cpp-netlib/uri"]
+	path = libs/cpp-netlib/uri
+	url = https://github.com/cpp-netlib/uri.git

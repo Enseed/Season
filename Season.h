@@ -1,41 +1,30 @@
 #pragma once
 
 #include <string>
+#include <map>
 #include <Enseed/Reflect/API/Class.h>
+
+namespace season
+{
 
 namespace parsing
 {
-	typedef enum
-	{
-		SIMPLE,
-		COMPLEX
-	} Kind;
+	template<class TREE, class T>
+	struct ConvertComplexType;
 
-	struct NodeTraits_Complex
-	{
-		static constexpr Kind kind = Kind::COMPLEX;
-	};
+	template<class TREE, class T>
+	struct ConvertSimpleType;
 
-	struct NodeTraits_Simple
-	{
-		static constexpr Kind kind = Kind::SIMPLE;
-	};
+	template<class TREE, class T, int IS_FUNDAMENDAL = std::is_fundamental<T>::value>
+	struct TConvertNode	{};
 
-	template<class T> struct NodeTraits : public NodeTraits_Complex {};
+	template<class TREE, class T>
+	struct TConvertNode<TREE, T, false> : public ConvertComplexType<TREE, T> {};
 
-	template<> class NodeTraits<char> : public NodeTraits_Simple{};
-	template<> class NodeTraits<short> : public NodeTraits_Simple{};
-	template<> class NodeTraits<int> : public NodeTraits_Simple{};
-	template<> class NodeTraits<long> : public NodeTraits_Simple{};
-	template<> class NodeTraits<long long> : public NodeTraits_Simple{};
-	template<> class NodeTraits<bool> : public NodeTraits_Simple{};
-	template<> class NodeTraits<float> : public NodeTraits_Simple{};
-	template<> class NodeTraits<double> : public NodeTraits_Simple{};
+	template<class TREE, class T>
+	struct TConvertNode<TREE, T, true> : public ConvertSimpleType<TREE, T> {};
 
 
-	template<class TREE, class T, int T_KIND = NodeTraits<T>::kind>
-	struct TConvertNode
-	{};
 
 	template<class TREE, class T, class NCNRT=std::remove_const<std::remove_reference<T>::type>::type>
 	struct ConvertNode : public TConvertNode<TREE, NCNRT>
@@ -57,7 +46,7 @@ namespace parsing
 	};
 
 	template<class TREE, class T>
-	struct TConvertNode<TREE, T, Kind::COMPLEX>
+	struct ConvertComplexType
 	{
 		template<class K, class V>
 		static void toDocumentImpl(const char *name, const std::map<K,V> &map, typename TREE::Document *document, typename TREE::Node *node)
@@ -129,7 +118,7 @@ namespace parsing
 	};
 
 	template<class TREE, class T>
-	struct TConvertNode<TREE, T, Kind::SIMPLE>
+	struct ConvertSimpleType
 	{
 		static void toDocument(const char *name, const T &obj, typename TREE::Document *document, typename TREE::Node *node)
 		{
@@ -141,7 +130,7 @@ namespace parsing
 			TREE::getSimple(node, obj, document);
 		}
 	};
-}
+} // namespace season::parsing
 
 template <class TREE>
 class Season
@@ -172,6 +161,8 @@ public:
 	}
 };
 
+} // namespace season
+
 #include "Extensions/boost/Optional.h"
 #include "Extensions/std/Vector.h"
 #include "Extensions/std/UniquePtr.h"
@@ -179,3 +170,4 @@ public:
 #include "Extensions/std/String.h"
 #include "Extensions/boost/PosixTime.h"
 #include "Extensions/boost/UUId.h"
+#include "Extensions/cpp-netlib/URI.h"

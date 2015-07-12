@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{385DC24D-2403-412C-B55F-F0292F5145C0}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>UnitTests</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\libs\cpp-netlib\uri\src;..\..\libs\Google\googletest\include;..\..\libs\Google\googletest;..\..;..\..\libs;..\..\libs\rapidjson\include;C:\Work\Enseed_svn\trunk\ThirdParty\boost</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>Precompiled.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\libs\cpp-netlib\uri\src;..\..\libs\Google\googletest\include;..\..\libs\Google\googletest;..\..;..\..\libs;..\..\libs\rapidjson\include;C:\Work\Enseed_svn\trunk\ThirdParty\boost</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>Precompiled.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\libs\Google\googletest\src\gtest-all.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\Google\googletest\src\gtest_main.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="ComplexTest.cpp" />
+    <ClCompile Include="DateTest.cpp" />
+    <ClCompile Include="EmptyTest.cpp" />
+    <ClCompile Include="Precompiled.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="PrimitiveTest.cpp" />
+    <ClCompile Include="SharedPtrTest.cpp" />
+    <ClCompile Include="SimpleStructTest.cpp" />
+    <ClCompile Include="UniquePtrTest.cpp" />
+    <ClCompile Include="URITest.cpp" />
+    <ClCompile Include="UUIdTest.cpp" />
+    <ClCompile Include="VectorTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Empty.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe %(Identity) -fms-compatibility-version=19.00.22609  "-I$(IncludePath)" -IC:\Work\Enseed_svn\trunk\ThirdParty\boost</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe %(Identity) -fms-compatibility-version=19.00.22609  "-I$(IncludePath)" -IC:\Work\Enseed_svn\trunk\ThirdParty\boost</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath).reflect.h</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).reflect.h</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe</AdditionalInputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MapTest.cpp">
+      <FileType>CppHeader</FileType>
+    </ClCompile>
+    <CustomBuild Include="ComplexStruct.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe %(Identity) -fms-compatibility-version=19.00.22609  "-I$(IncludePath)" -IC:\Work\Enseed_svn\trunk\ThirdParty\boost -IC:\Work\Public\Enseed\Restless\libs\Enseed\Season\libs\cpp-netlib\uri\src\</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe %(Identity) -fms-compatibility-version=19.00.22609  "-I$(IncludePath)" -IC:\Work\Enseed_svn\trunk\ThirdParty\boost -IC:\Work\Public\Enseed\Restless\libs\Enseed\Season\libs\cpp-netlib\uri\src\</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath).reflect.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).reflect.h</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="Precompiled.h" />
+    <CustomBuild Include="SimpleStruct.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe %(Identity) -fms-compatibility-version=19.00.22609  "-I$(IncludePath)" -IC:\Work\Enseed_svn\trunk\ThirdParty\boost</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe %(Identity) -fms-compatibility-version=19.00.22609  "-I$(IncludePath)" -IC:\Work\Enseed_svn\trunk\ThirdParty\boost</Command>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </DeploymentContent>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath).reflect.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath).reflect.h</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Work\Public\Enseed\Reflect\Parser\build\Release\Reflect.exe</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="Tests.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\libs\build-cpp-netlib\win\cpp-netlib-uri.vcxproj">
+      <Project>{d800f61a-8beb-449f-96b6-415111a50452}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

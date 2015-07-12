@@ -142,6 +142,7 @@ public:
 	{
 		return iter->second;
 	}
+
 };
 
 typedef Season<BoostTree> BoostSeason;
