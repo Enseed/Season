@@ -1,6 +1,6 @@
 #ifndef __RECLECT_COMPLEXSTRUCT_H_REFLECT_H__
 #define __RECLECT_COMPLEXSTRUCT_H_REFLECT_H__
-/* This file was generated on 2015-Jul-12 00:04:13 by Reflect */
+/* This file was generated on 2015-Jul-13 22:14:57 by Reflect */
 
 #include <Enseed/Reflect/API/Class.h>
 
@@ -105,26 +105,26 @@ template<> struct Class<ComplexStruct, 0> : public ClassBase<ComplexStruct>
 		struct mapOfSharedInt
 		{
 			typedef mapOfSharedInt field_type;
-			typedef std::map<std::string, std::shared_ptr<int> > type;
-			typedef const std::map<std::string, std::shared_ptr<int> > const_type;
+			typedef int type;
+			typedef const int const_type;
 			typedef ComplexStruct host_type;
 			typedef const ComplexStruct const_host_type;
 			static const char* name() { return "mapOfSharedInt"; }
 			static constexpr reflect::Visibility::Value visibility = reflect::Visibility::PUBLIC;
-			static const std::map<std::string, std::shared_ptr<int> >& readRef(const ComplexStruct &target) { return target.mapOfSharedInt; }
-			static std::map<std::string, std::shared_ptr<int> >* writePtr(ComplexStruct *target) { return &target->mapOfSharedInt; }
+			static const int& readRef(const ComplexStruct &target) { return target.mapOfSharedInt; }
+			static int* writePtr(ComplexStruct *target) { return &target->mapOfSharedInt; }
 		};
 		struct mapOfInt
 		{
 			typedef mapOfInt field_type;
-			typedef std::map<std::string, int> type;
-			typedef const std::map<std::string, int> const_type;
+			typedef int type;
+			typedef const int const_type;
 			typedef ComplexStruct host_type;
 			typedef const ComplexStruct const_host_type;
 			static const char* name() { return "mapOfInt"; }
 			static constexpr reflect::Visibility::Value visibility = reflect::Visibility::PUBLIC;
-			static const std::map<std::string, int>& readRef(const ComplexStruct &target) { return target.mapOfInt; }
-			static std::map<std::string, int>* writePtr(ComplexStruct *target) { return &target->mapOfInt; }
+			static const int& readRef(const ComplexStruct &target) { return target.mapOfInt; }
+			static int* writePtr(ComplexStruct *target) { return &target->mapOfInt; }
 		};
 		struct optionalInt
 		{
@@ -177,14 +177,14 @@ template<> struct Class<ComplexStruct, 0> : public ClassBase<ComplexStruct>
 		struct uriValue
 		{
 			typedef uriValue field_type;
-			typedef network::uri type;
-			typedef const network::uri const_type;
+			typedef int type;
+			typedef const int const_type;
 			typedef ComplexStruct host_type;
 			typedef const ComplexStruct const_host_type;
 			static const char* name() { return "uriValue"; }
 			static constexpr reflect::Visibility::Value visibility = reflect::Visibility::PUBLIC;
-			static const network::uri& readRef(const ComplexStruct &target) { return target.uriValue; }
-			static network::uri* writePtr(ComplexStruct *target) { return &target->uriValue; }
+			static const int& readRef(const ComplexStruct &target) { return target.uriValue; }
+			static int* writePtr(ComplexStruct *target) { return &target->uriValue; }
 		};
 	};
 

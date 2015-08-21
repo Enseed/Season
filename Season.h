@@ -4,6 +4,11 @@
 #include <map>
 #include <Enseed/Reflect/API/Class.h>
 
+#define ENSEED_SEASON_ENABLE_BOOST
+#define ENSEED_SEASON_ENABLE_STD
+#define ENSEED_SEASON_ENABLE_CPP_NETLIB
+#define ENSEED_SEASON_ENABLE_ENSEED
+
 namespace season
 {
 
@@ -163,11 +168,18 @@ public:
 
 } // namespace season
 
-#include "Extensions/boost/Optional.h"
-#include "Extensions/std/Vector.h"
-#include "Extensions/std/UniquePtr.h"
-#include "Extensions/std/SharedPtr.h"
-#include "Extensions/std/String.h"
-#include "Extensions/boost/PosixTime.h"
-#include "Extensions/boost/UUId.h"
-#include "Extensions/cpp-netlib/URI.h"
+#ifdef ENSEED_SEASON_ENABLE_BOOST
+#include "Extensions/boost.h"
+#endif
+
+#ifdef ENSEED_SEASON_ENABLE_STD
+#include "Extensions/std.h"
+#endif
+
+#ifdef ENSEED_SEASON_ENABLE_CPP_NETLIB
+#include "Extensions/cpp-netlib.h"
+#endif
+
+#ifdef ENSEED_SEASON_ENABLE_ENSEED
+#include "Extensions/Enseed.h"
+#endif

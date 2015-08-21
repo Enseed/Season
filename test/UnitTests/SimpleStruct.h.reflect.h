@@ -1,6 +1,6 @@
 #ifndef __RECLECT_SIMPLESTRUCT_H_REFLECT_H__
 #define __RECLECT_SIMPLESTRUCT_H_REFLECT_H__
-/* This file was generated on 2015-Jul-11 22:51:40 by Reflect */
+/* This file was generated on 2015-Jul-13 22:14:57 by Reflect */
 
 #include <Enseed/Reflect/API/Class.h>
 

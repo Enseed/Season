@@ -1,15 +1,15 @@
 #pragma once
 
-#include <memory>
+#include <Enseed/Generic/AutoPtr/AutoPtr.h>
 
 namespace season
 {
 	namespace parsing
 	{
 		template<class TREE, class T>
-		struct ConvertComplexType<TREE, std::shared_ptr<T>>
+		struct ConvertComplexType<TREE, sd::AutoPtr<T>>
 		{
-			static void toDocument(const char *name, const std::shared_ptr<T> &objPtr, typename TREE::Document *document, typename TREE::Node *node)
+			static void toDocument(const char *name, const sd::AutoPtr<T> &objPtr, typename TREE::Document *document, typename TREE::Node *node)
 			{
 				if (objPtr)
 				{
@@ -17,7 +17,7 @@ namespace season
 				}
 			}
 
-			static void fromDocument(const typename TREE::Node &node, std::shared_ptr<T> *objPtr, typename TREE::Document *document)
+			static void fromDocument(const typename TREE::Node &node, sd::AutoPtr<T> *objPtr, typename TREE::Document *document)
 			{
 				if (!TREE::isEmpty(node))
 				{

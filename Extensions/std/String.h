@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <Enseed/Reflect/API/Class.h>
 
 namespace season
 {
