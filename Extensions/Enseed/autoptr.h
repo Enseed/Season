@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Enseed/Generic/AutoPtr/AutoPtr.h>
+#include <Generic/AutoPtr/AutoPtr.h>
 
 namespace season
 {

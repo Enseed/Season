@@ -4,7 +4,7 @@
 #include <boost/date_time/posix_time/ptime.hpp>
 #include <boost/date_time/posix_time/time_formatters.hpp>
 #include <boost/date_time/posix_time/time_parsers.hpp>
-#include <Enseed/Reflect/API/Class.h>
+#include <Reflect/Class.h>
 
 namespace season
 {

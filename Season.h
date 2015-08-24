@@ -2,7 +2,7 @@
 
 #include <string>
 #include <map>
-#include <Enseed/Reflect/API/Class.h>
+#include <Reflect/Class.h>
 
 #define ENSEED_SEASON_ENABLE_BOOST
 #define ENSEED_SEASON_ENABLE_STD

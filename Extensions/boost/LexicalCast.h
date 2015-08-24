@@ -2,7 +2,7 @@
 
 #include <string>
 #include <boost/lexical_cast.hpp>
-#include <Enseed/Reflect/API/Class.h>
+#include <Reflect/Class.h>
 
 namespace season
 {
